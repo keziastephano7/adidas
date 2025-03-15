@@ -19,6 +19,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       } else if (buttonText == "=") {
         try {
           num2 = double.parse(output);
+
           if (operand == "+") output = (num1 + num2).toString();
           if (operand == "-") output = (num1 - num2).toString();
           if (operand == "*") output = (num1 * num2).toString();
@@ -34,7 +35,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
         operand = buttonText;
         output = "";
       } else {
-        output = output == "0" || output == "Error" ? buttonText : output + buttonText;
+        output = (output == "0" || output == "Error") ? buttonText : output + buttonText;
       }
     });
   }
@@ -58,26 +59,45 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               child: Container(
                 alignment: Alignment.centerRight,
                 padding: EdgeInsets.all(25),
-                child: Text(output, style: TextStyle(fontSize: 40, color: output == "Error" ? Colors.red : Colors.black, fontWeight: FontWeight.bold)),
+                child: Text(
+                  output,
+                  style: TextStyle(
+                    fontSize: 40,
+                    color: output == "Error" ? Colors.red : Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ),
             for (var row in ["7 8 9 /", "4 5 6 *", "1 2 3 -", "C 0 = +"])
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: row.split(" ").map((text) {
-                  return SizedBox(
-                    width: 75,
-                    height: 75,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.amber,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: row.split(" ").map((text) {
+                    return SizedBox(
+                      width: 75,
+                      height: 75,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.amber,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        onPressed: () => buttonPressed(text),
+                        child: Text(
+                          text,
+                          style: TextStyle(
+                            fontSize: 25,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
-                      onPressed: () => buttonPressed(text),
-                      child: Text(text, style: TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold)),
-                    ),
-                  );
-                }).toList(),
+                    );
+                  }).toList(),
+                ),
               ),
           ],
         ),
