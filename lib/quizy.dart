@@ -10,17 +10,32 @@ class _QuizScreenState extends State<QuizScreen> {
   List<Map<String, dynamic>> _questions = [
     {
       "question": "What is the largest ocean on Earth?",
-      "options": ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+      "options": [
+        "Atlantic Ocean",
+        "Indian Ocean",
+        "Arctic Ocean",
+        "Pacific Ocean"
+      ],
       "answer": "Pacific Ocean"
     },
     {
       "question": "Which element has the chemical symbol 'O'?",
-      "options": ["Gold", "Oxygen", "Osmium", "Opal"],
+      "options": [
+        "Gold",
+        "Oxygen",
+        "Osmium",
+        "Opal"
+      ],
       "answer": "Oxygen"
     },
     {
       "question": "Who developed the theory of relativity?",
-      "options": ["Isaac Newton", "Albert Einstein", "Nikola Tesla", "Galileo Galilei"],
+      "options": [
+        "Isaac Newton",
+        "Albert Einstein",
+        "Nikola Tesla",
+        "Galileo Galilei"
+      ],
       "answer": "Albert Einstein"
     }
   ];
@@ -119,19 +134,32 @@ class _QuizScreenState extends State<QuizScreen> {
           children: [
             Text(
               "Time Left: $_timer s",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.red),
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.red,
+              ),
             ),
             SizedBox(height: 20),
             Text(
               _questions[_currentQuestionIndex]['question'],
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 20),
             ..._questions[_currentQuestionIndex]['options'].map((option) {
-              return ElevatedButton(
-                onPressed: () => _checkAnswer(option),
-                child: Text(option, style: TextStyle(fontSize: 20)),
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5.0),
+                child: ElevatedButton(
+                  onPressed: () => _checkAnswer(option),
+                  child: Text(
+                    option,
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
               );
             }).toList(),
           ],
